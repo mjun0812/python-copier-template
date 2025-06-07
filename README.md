@@ -28,7 +28,7 @@ A simple modern Python project template powered by [Copier](https://copier.readt
 ### Generate a New Project
 
 ```bash
-uvx copier copy https://github.com/mjun0812/python-copier-template your-project-name
+uvx copier copy gh:mjun0812/python-copier-template your-project-name
 ```
 
 Follow the interactive prompts to configure your project:
@@ -63,7 +63,7 @@ uv run ruff check .
 uv run ruff check . --fix
 ```
 
-## Docker Development
+### Docker Development Setup
 
 The template includes a complete Docker setup:
 
@@ -83,6 +83,13 @@ docker compose up
 ### VS Code Devcontainer
 
 Open the project in VS Code and use the "Reopen in Container" command for a fully configured development environment.
+
+### Update Template
+
+```bash
+cd your-project-name
+uvx copier update -A
+```
 
 ## Project Structure
 
