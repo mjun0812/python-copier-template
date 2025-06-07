@@ -15,8 +15,14 @@ if docker system info | grep -qE '^\s*Runtimes: .*nvidia.*'; then
     GPU_OPTION="--gpus all"
 fi
 
+# Check if TTY is available (not in CI environment)
+TTY_OPTION=""
+if [ -t 0 ] && [ -t 1 ]; then
+    TTY_OPTION="-it"
+fi
+
 docker run \
-    -it \
+    $TTY_OPTION \
     $GPU_OPTION \
     --rm \
     --shm-size=32g \
