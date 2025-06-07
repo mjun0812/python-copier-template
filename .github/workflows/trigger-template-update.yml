@@ -3,6 +3,9 @@ name: Update Child Repository Template
 on:
   release:
     types: [published, released]
+  push:
+    tags:
+      - "v*"
   workflow_dispatch:
     inputs:
       target_repository:
