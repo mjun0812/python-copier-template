@@ -1,0 +1,75 @@
+name: Update Child Repository Template
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      target_repository:
+        description: "Target repository to update (default: mjun0812/python-project-template)"
+        required: false
+        default: "mjun0812/python-project-template"
+
+jobs:
+  update-child-template:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout child repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.inputs.target_repository || 'mjun0812/python-project-template' }}
+          token: ${{ secrets.CHILD_REPO_TOKEN }}
+          path: child-repo
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+
+      - name: Update template in child repository
+        working-directory: child-repo
+        run: |
+          # Update from template
+          uvx copier update -A --trust gh:${{ github.repository }}
+        env:
+          COPIER_CONFLICT_STRATEGY: ours
+
+      - name: Check for changes
+        id: changes
+        working-directory: child-repo
+        run: |
+          if git diff --quiet; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Pull Request
+        if: steps.changes.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.CHILD_REPO_TOKEN }}
+          path: child-repo
+          commit-message: |
+            Update template to version ${{ github.event.release.tag_name || 'latest' }}
+          title: "Update template to version ${{ github.event.release.tag_name || 'latest' }}"
+          body: |
+            ## Template Update
+
+            This PR updates the project template to version `${{ github.event.release.tag_name || 'latest' }}`.
+
+            ### Changes
+            - Updated from template: ${{ github.repository }}
+            - Template version: ${{ github.event.release.tag_name || 'latest' }}
+            ${{ github.event.release.html_url && format('- Release notes: {0}', github.event.release.html_url) || '' }}
+
+            ### Testing
+            Please review the changes and test the updated template before merging.
+
+            ---
+            *This PR was automatically created by the template update workflow.*
+          branch: template-update-${{ github.event.release.tag_name || github.run_number }}
+          delete-branch: true
