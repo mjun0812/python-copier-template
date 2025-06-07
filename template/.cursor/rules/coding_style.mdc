@@ -19,6 +19,7 @@ Follow these guidelines precisely.
 2. Code Quality
    - Type hints required for all code
    - Follow existing patterns exactly
+   - Use Google style for docstring
 
 3. Testing Requirements
    - Framework: `uv run --frozen pytest`
@@ -27,7 +28,7 @@ Follow these guidelines precisely.
    - Bug fixes require regression tests
 
 4. Git
-   - Commit messages should follow the Conventional Commits style.
+   - Follow the Conventional Commits style on commit messages.
 
 ## Code Formatting and Linting
 
