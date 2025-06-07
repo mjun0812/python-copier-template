@@ -1,7 +1,7 @@
 # Python Copier Template
 
-[![test](https://github.com/mjun0812/python-copier-template/workflows/test/badge.svg)](https://github.com/mjun0812/python-copier-template/actions?query=workflow%3Atest)
 [![Copier](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/copier-org/copier/master/img/badge/badge-black.json)](https://github.com/copier-org/copier)
+[![Test](https://github.com/mjun0812/python-copier-template/actions/workflows/test.yml/badge.svg)](https://github.com/mjun0812/python-copier-template/actions/workflows/test.yml)
 
 A simple modern Python project template powered by [Copier](https://copier.readthedocs.io/).
 
