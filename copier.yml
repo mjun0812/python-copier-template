@@ -33,8 +33,16 @@ description:
 author_name:
   type: str
   help: What is your name?
+  validator: >-
+    {% if not author_name or author_name.strip() == '' %}
+    Author name cannot be empty
+    {% endif %}
 
 author_email:
   type: str
   placeholder: "email@example.com"
   help: What is your email?
+  validator: >-
+    {% if not author_email or author_email.strip() == '' %}
+    Author email cannot be empty
+    {% endif %}
