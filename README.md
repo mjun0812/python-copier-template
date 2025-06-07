@@ -18,7 +18,7 @@ A simple modern Python project template powered by [Copier](https://copier.readt
 
 ## Quick Start
 
-### Pre-Request
+### Pre-Requirements
 
 - [uv](https://docs.astral.sh/uv/): Fast Python package installer
 
@@ -65,6 +65,9 @@ uv run ruff check . --fix
 The template includes a complete Docker setup:
 
 ```bash
+# create uv.lock file
+uv sync
+
 # use the provided scripts
 ./docker/build.sh
 ./docker/run.sh # or./docker/run.sh (Command)

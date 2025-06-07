@@ -26,7 +26,8 @@ docker run \
     --env USER_ID=$USER_ID \
     --env GROUP_NAME=$GROUP_NAME \
     --env GROUP_ID=$GROUP_ID \
-    -v $HOME/.Xauthority:$HOME/.Xauthority:rw \
+    --workdir /app \
+    -v $HOME/.Xauthority:/home/$USER_NAME/.Xauthority:rw \
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
     -v ${PWD}:/app \
     --name "${IMAGE_NAME}-$(date '+%s')" \

@@ -45,6 +45,9 @@
 			]
 		}
 	},
-	"postCreateCommand": "uv sync --frozen",
+	"mounts": [
+		"source=claude-code-config,target=/home/vscode/.claude,type=volume"
+	],
+	"postCreateCommand": "uv sync",
 	"postStartCommand": "uv run pre-commit install"
 }
