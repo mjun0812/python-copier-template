@@ -95,7 +95,7 @@ your-project/
 
 ### Why don't you use a type checker?
 
-I'm waiting for [`ty`](https://github.com/astral-sh/ty).
+I'm waiting for stable release of [`ty`](https://github.com/astral-sh/ty).
 You can install and use your preferred type checker.
 
 ## Support
