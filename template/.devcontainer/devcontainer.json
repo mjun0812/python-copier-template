@@ -1,0 +1,50 @@
+{
+	"name": "python-devcontainer",
+	"image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+	"containerEnv": {
+		"DISPLAY": "${localEnv:DISPLAY}",
+		"PYTHONUNBUFFERED": "1",
+		"PYTHONDONTWRITEBYTECODE": "1",
+		"UV_CACHE_DIR": "${containerWorkspaceFolder}/.cache/uv",
+		"UV_LINK_MODE": "copy",
+		"UV_PROJECT_ENVIRONMENT": "/home/vscode/.venv",
+		"UV_COMPILE_BYTECODE": "1"
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/github-cli:1": {},
+		"ghcr.io/devcontainers/features/common-utils:2": {
+			"configureZshAsDefaultShell": true
+		},
+		"ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+			"packages": "curl,wget,git,jq,ca-certificates,build-essential"
+		},
+		"ghcr.io/va-h/devcontainers-features/uv:1": {
+			"shellAutocompletion": true
+		},
+		"ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {}
+	},
+	"runArgs": [
+		"--init",
+		"--rm"
+	],
+	"hostRequirements": {
+		"gpu": "optional"
+	},
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"python.defaultInterpreterPath": "/home/vscode/.venv/bin/python"
+			},
+			"extensions": [
+				"ms-python.python",
+				"charliermarsh.ruff",
+				"eamodio.gitlens",
+				"tamasfe.even-better-toml",
+				"ms-toolsai.jupyter",
+				"yzhang.markdown-all-in-one"
+			]
+		}
+	},
+	"postCreateCommand": "uv sync --frozen",
+	"postStartCommand": "uv run pre-commit install"
+}

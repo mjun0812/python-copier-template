@@ -1,0 +1,105 @@
+# Python Copier Template
+
+A simple modern Python project template powered by [Copier](https://copier.readthedocs.io/).
+
+## Features
+
+- 🚀 **Modern Python**: Support for Python 3.10-3.13
+- 📦 **uv Package Manager**: Fast and reliable package management with [uv](https://github.com/astral-sh/uv)
+- 🐳 **Docker Support**: Complete Docker development environment
+- 📦 **Devcontainer Support**: VS Code devcontainer for consistent development
+- ✨ **AI Editor Support**: [Cursor rules](https://docs.cursor.com/context/rules) and
+  [CLAUDE.md](https://docs.anthropic.com/en/docs/claude-code/overview) included for AI-powered development
+- 📝 **Type Hints**: Full type annotation support with modern Python features
+- 🔍 **Code Quality**: Pre-configured Ruff for linting and formatting
+- 🧪 **Testing**: pytest setup with example tests
+- 🔧 **Pre-commit Hooks**: Automated code quality checks
+- 🏗️ **CI Ready**: GitHub Actions workflows included
+
+## Quick Start
+
+### Pre-Request
+
+- [uv](https://docs.astral.sh/uv/): Fast Python package installer
+
+### Generate a New Project
+
+```bash
+uvx copier copy https://github.com/mjun0812/python-copier-template your-project-name
+```
+
+Follow the interactive prompts to configure your project:
+
+- **Project name**: Your project's name
+- **Python version**: Choose from 3.10, 3.11, 3.12, or 3.13
+- **Package name**: The name used for importing your package (e.g., `import package_name`)
+- **Description**: A short description of your project
+- **Author name**: Your name
+- **Author email**: Your email address
+
+### Development Setup
+
+After generating your project:
+
+```bash
+cd your-project-name
+
+# Install dependencies
+uv sync
+
+# Install pre-commit hooks
+uv run pre-commit install
+
+# Run tests
+uv run pytest
+
+# Run formatting and linting (automatically runs on commit)
+uv run ruff format .
+uv run ruff check .
+# Auto Fix
+uv run ruff check . --fix
+```
+
+## Docker Development
+
+The template includes a complete Docker setup:
+
+```bash
+# use the provided scripts
+./docker/build.sh
+./docker/run.sh # or./docker/run.sh (Command)
+
+# Build and run with Docker Compose
+docker compose build
+docker compose up
+```
+
+### VS Code Devcontainer
+
+Open the project in VS Code and use the "Reopen in Container" command for a fully configured development environment.
+
+## Project Structure
+
+```text
+your-project/
+├── src/
+│   └── your_project/          # Main package
+├── tests/                     # Test files
+├── docker/                    # Docker configuration
+├── compose.yml               # Docker Compose setup
+├── pyproject.toml            # Project configuration
+└── README.md                 # Project documentation
+```
+
+## Q&A
+
+### Why don't you use a type checker?
+
+I'm waiting for [`ty`](https://github.com/astral-sh/ty).
+You can install and use your preferred type checker.
+
+## Support
+
+- 📖 [Copier Documentation](https://copier.readthedocs.io/)
+- 🐍 [uv Documentation](https://docs.astral.sh/uv/)
+- 🔍 [Ruff Documentation](https://docs.astral.sh/ruff/)

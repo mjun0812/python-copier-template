@@ -1,0 +1,40 @@
+_templates_suffix: ""
+_subdirectory: template
+
+project_name:
+  type: str
+  help: What is your project name?
+  placeholder: my_project
+
+python_version:
+  type: str
+  default: "3.12"
+  help: Which version of Python do you want to use?
+  choices:
+    - "3.10"
+    - "3.11"
+    - "3.12"
+    - "3.13"
+
+package_name:
+  type: str
+  help: What is your package name? This name is used by `import package_name`.
+  placeholder: my_package
+  validator: >-
+    {% if not (package_name | regex_search('^[a-zA-Z][a-zA-Z_0-9]+$')) %}
+    {{package_name}} is not a valid python package name
+    {% endif %}
+
+description:
+  type: str
+  help: A short description of your project
+  placeholder: Modern Python Project
+
+author_name:
+  type: str
+  help: What is your name?
+
+author_email:
+  type: str
+  placeholder: "email@example.com"
+  help: What is your email?

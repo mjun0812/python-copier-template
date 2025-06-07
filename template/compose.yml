@@ -1,0 +1,15 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - .:/app
+      # Use anonymous volumes to avoid sharing host's .venv
+      # Renew volumes when you change packages with
+      # `docker compose up --renew-anon-volumes`
+      - /app/.venv
+    command: >
+      python main.py

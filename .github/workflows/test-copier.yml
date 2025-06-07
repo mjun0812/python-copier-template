@@ -1,0 +1,62 @@
+name: Test Copier Template
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Copy Template
+        run: |
+          uvx copier copy \
+            ./ \
+            /tmp/test-copier \
+            -d project_name=test-copier \
+            -d python_version=3.12 \
+            -d package_name=test_copier \
+            -d description="Test Copier" \
+            -d author_name=test-copier \
+            -d author_email=test-copier@example.com
+
+      - name: Test Package Installation
+        working-directory: /tmp/test-copier
+        run: |
+          uv sync
+
+      - name: Test Ruff Format
+        working-directory: /tmp/test-copier
+        run: |
+          uv run ruff format --check --diff .
+
+      - name: Test Ruff Lint
+        working-directory: /tmp/test-copier
+        run: |
+          uv run ruff check --output-format=github .
+
+      - name: Test pytest
+        working-directory: /tmp/test-copier
+        run: |
+          uv run pytest -vs
+
+      - name: Test Docker
+        working-directory: /tmp/test-copier
+        run: |
+          ./docker/build.sh
+          ./docker/run.sh
+
+      - name: Test Docker Compose
+        working-directory: /tmp/test-copier
+        run: |
+          docker compose build
+          docker compose up -d
+          docker compose down
