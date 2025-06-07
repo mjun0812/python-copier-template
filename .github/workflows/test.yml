@@ -1,4 +1,4 @@
-name: Test Copier Template
+name: Test
 
 on:
   push:
@@ -11,6 +11,9 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
     steps:
       - uses: actions/checkout@v4
       - name: Install uv
@@ -22,7 +25,7 @@ jobs:
             ./ \
             /tmp/test-copier \
             -d project_name=test-copier \
-            -d python_version=3.12 \
+            -d python_version=${{ matrix.python-version }} \
             -d package_name=test_copier \
             -d description="Test Copier" \
             -d author_name=test-copier \
