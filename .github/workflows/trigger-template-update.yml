@@ -33,9 +33,7 @@ jobs:
         working-directory: child-repo
         run: |
           # Update from template
-          uvx copier update -A --trust gh:${{ github.repository }}
-        env:
-          COPIER_CONFLICT_STRATEGY: ours
+          uvx copier update -A --trust
 
       - name: Check for changes
         id: changes
