@@ -5,6 +5,10 @@ project_name:
   type: str
   help: What is your project name?
   placeholder: my_project
+  validator: >-
+    {% if not (project_name | regex_search('^[a-zA-Z0-9]([a-zA-Z0-9_.-]*[a-zA-Z0-9])?$')) %}
+    {{project_name}} is not a valid package or extra name. Names must start and end with a letter or digit and may only contain -, _, ., and alphanumeric characters.
+    {% endif %}
 
 python_version:
   type: str
