@@ -83,6 +83,7 @@ docker compose up
 ### VS Code Devcontainer
 
 Open the project in VS Code and use the "Reopen in Container" command for a fully configured development environment.
+Devcontainer will automatically install uv, Claude Code, and pre-commit hooks.
 
 ### Update Template
 
@@ -103,6 +104,11 @@ your-project/
 ├── pyproject.toml            # Project configuration
 └── README.md                 # Project documentation
 ```
+
+## AI Editor Support
+
+- [Cursor Rules](./template/.cursor/rules/coding_style.mdc)
+- [CLAUDE.md](./template/CLAUDE.md)
 
 ## Q&A
 
