@@ -5,6 +5,8 @@
 
 A simple modern Python project template powered by [Copier](https://copier.readthedocs.io/).
 
+[Japanese Article](https://zenn.dev/mjun0812/articles/0ae2325d40ed20)
+
 ## Features
 
 - 🚀 **Modern Python**: Support for Python 3.10-3.13
