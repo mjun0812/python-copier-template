@@ -63,3 +63,16 @@ jobs:
           docker compose build
           docker compose up -d
           docker compose down
+
+  ci-check:
+    name: ci status check
+    runs-on: ubuntu-latest
+    needs: [ci]
+    if: always()
+    steps:
+      - name: Some CI failed
+        if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')}}
+        run: exit 1
+      - name: All CI passed
+        if: ${{ contains(needs.*.result, 'success') || contains(needs.*.result, 'skipped') }}
+        run: exit 0
