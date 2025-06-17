@@ -36,7 +36,8 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 # Sync this project
 COPY . .
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync --locked --no-editable
+    ulimit -n 8192 \
+    && uv sync --locked --no-editable
 
 FROM $RUNNER_IMAGE AS production
 
