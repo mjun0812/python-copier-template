@@ -72,6 +72,7 @@ jobs:
         working-directory: /tmp/test-copier
         run: |
           npm install -g @devcontainers/cli
+          git init
           devcontainer build --workspace-folder /tmp/test-copier
           devcontainer up --workspace-folder /tmp/test-copier
 
