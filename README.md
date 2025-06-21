@@ -5,7 +5,7 @@
 
 A simple modern Python project template powered by [Copier](https://copier.readthedocs.io/).
 
-[Japanese Article](https://zenn.dev/mjun0812/articles/0ae2325d40ed20)
+[Article](https://mjunya.com/en/posts/2025-06-15-python-template/) [日本語記事](https://zenn.dev/mjun0812/articles/0ae2325d40ed20)
 
 ## Features
 
