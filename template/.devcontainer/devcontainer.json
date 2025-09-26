@@ -49,12 +49,13 @@
 	},
 	"remoteUser": "vscode",
 	"containerUser": "vscode",
+	"initializeCommand": "mkdir -p ${localEnv:HOME}/.claude ${localEnv:HOME}/.codex && touch ${localEnv:HOME}/.claude/CLAUDE.md ${localEnv:HOME}/.codex/config.toml",
 	"mounts": [
 		"source=shell_history-${devcontainerId},target=/shell_history,type=volume",
-		"source=${localEnv:HOME}/.claude,target=/home/vscode/.claude,type=bind,consistency=cached",
-		"source=${localEnv:HOME}/.claude/CLAUDE.md,target=/home/vscode/.claude/CLAUDE.md,type=bind,consistency=cached",
-		"source=${localEnv:HOME}/.codex,target=/home/vscode/.codex,type=bind,consistency=cached",
-		"source=${localEnv:HOME}/.codex/config.toml,target=/home/vscode/.codex/config.toml,type=bind,consistency=cached"
+		"source=${localEnv:HOME}/.claude,target=/home/vscode/.claude,type=bind",
+		"source=${localEnv:HOME}/.claude/CLAUDE.md,target=/home/vscode/.claude/CLAUDE.md,type=bind",
+		"source=${localEnv:HOME}/.codex,target=/home/vscode/.codex,type=bind",
+		"source=${localEnv:HOME}/.codex/config.toml,target=/home/vscode/.codex/config.toml,type=bind"
 	],
 	"postCreateCommand": "npm install -g @openai/codex@latest && uv sync",
 	"postStartCommand": "uv run pre-commit install"
