@@ -64,7 +64,6 @@ ignore = [
     "SIM105", # try-except-pass blocks that can be replaced with the contextlib.suppress context manager.
     "SIM108", # Use ternary operator instead of `if`-`else`-block
     "SIM116", # Use a dictionary instead of consecutive `if` statements
-    "UP038",  # (Deprecated) Use `X | Y` in `isinstance` call instead of `(X, Y)`
 ]
 unfixable = [
     "F401", # unused import

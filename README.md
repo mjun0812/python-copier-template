@@ -13,7 +13,7 @@ A simple modern Python project template powered by [Copier](https://copier.readt
 - 📦 **uv Package Manager**: Fast and reliable package management with [uv](https://github.com/astral-sh/uv)
 - 🐳 **Docker Support**: Complete Docker development environment
 - 📦 **Devcontainer Support**: VS Code devcontainer for consistent development
-- ✨ **AI Editor Support**: [Cursor rules](https://docs.cursor.com/context/rules) and
+- ✨ **AI Editor Support**: [AGENTS.md](https://agents.md) and
   [CLAUDE.md](https://docs.anthropic.com/en/docs/claude-code/overview) included for AI-powered development
 - 📝 **Type Hints**: Full type annotation support with modern Python features
 - 🔍 **Code Quality**: Pre-configured Ruff for linting and formatting
@@ -109,8 +109,8 @@ your-project/
 
 ## AI Editor Support
 
-- [Cursor Rules](./template/.cursor/rules/coding_style.mdc)
-- [CLAUDE.md](./template/CLAUDE.md)
+- [AGENTS.md(`./template/AGENTS.md`)](https://agents.md)
+- [CLAUDE.md(`./template/CLAUDE.md`)](https://docs.claude.com/en/docs/claude-code/memory#claude-md-imports)
 
 ## Q&A
 

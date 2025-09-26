@@ -1,8 +1,3 @@
----
-description: 
-globs: 
-alwaysApply: true
----
 # Development Guidelines
 
 This document contains critical information about working with this codebase.
