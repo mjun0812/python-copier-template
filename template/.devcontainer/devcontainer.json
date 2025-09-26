@@ -5,10 +5,11 @@
 		"DISPLAY": "${localEnv:DISPLAY}",
 		"PYTHONUNBUFFERED": "1",
 		"PYTHONDONTWRITEBYTECODE": "1",
-		"UV_CACHE_DIR": "${containerWorkspaceFolder}/.cache/uv",
+		"UV_CACHE_DIR": "/home/vscode/.cache/uv",
 		"UV_LINK_MODE": "copy",
 		"UV_PROJECT_ENVIRONMENT": "/home/vscode/.venv",
-		"UV_COMPILE_BYTECODE": "1"
+		"UV_COMPILE_BYTECODE": "1",
+		"CLAUDE_CONFIG_DIR": "/home/vscode/.claude"
 	},
 	"features": {
 		"ghcr.io/devcontainers/features/github-cli:1": {},
@@ -16,7 +17,7 @@
 			"configureZshAsDefaultShell": true
 		},
 		"ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
-			"packages": "curl,wget,git,jq,ca-certificates,build-essential,ripgrep"
+			"packages": "curl,wget,git,jq,ca-certificates,build-essential,ripgrep,fd-find"
 		},
 		"ghcr.io/va-h/devcontainers-features/uv:1": {
 			"shellAutocompletion": true
@@ -46,9 +47,16 @@
 			]
 		}
 	},
+	"remoteUser": "vscode",
+	"containerUser": "vscode",
+	"initializeCommand": "mkdir -p ${localEnv:HOME}/.claude ${localEnv:HOME}/.codex && touch ${localEnv:HOME}/.claude/CLAUDE.md ${localEnv:HOME}/.codex/config.toml",
 	"mounts": [
-		"source=claude-code-config,target=/home/vscode/.claude,type=volume"
+		"source=shell_history-${devcontainerId},target=/shell_history,type=volume",
+		"source=${localEnv:HOME}/.claude,target=/home/vscode/.claude,type=bind",
+		"source=${localEnv:HOME}/.claude/CLAUDE.md,target=/home/vscode/.claude/CLAUDE.md,type=bind",
+		"source=${localEnv:HOME}/.codex,target=/home/vscode/.codex,type=bind",
+		"source=${localEnv:HOME}/.codex/config.toml,target=/home/vscode/.codex/config.toml,type=bind"
 	],
-	"postCreateCommand": "uv sync",
+	"postCreateCommand": "npm install -g @openai/codex@latest && uv sync",
 	"postStartCommand": "uv run pre-commit install"
 }
