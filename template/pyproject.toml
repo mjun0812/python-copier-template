@@ -38,12 +38,10 @@ select = [
 ]
 ignore = [
     "ANN401", # Checks that function arguments are annotated with a more specific type than Any.
-    "B007",   # Unused loop variable
-    "B008",   # Function call in default argument
     "B905",   # `zip()` without `strict=True`
     "COM812", # Missing trailing comma
     "COM819", # Trailing comma prohibited
-    "D1",     # Missing docstring in public module, class, function, or method
+    "D100",   # Missing docstring in public module
     "D203",   # One blank line required before class docstring (ignored because D211 is prioritized in pydocstyle convention 'google')
     "D205",   # 1 blank line required between summary line and description
     "D212",   # Multi-line docstring summary should start at the first line
