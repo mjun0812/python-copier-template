@@ -1,6 +1,9 @@
 {
 	"name": "python-devcontainer",
-	"image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": ".."
+	},
 	"containerEnv": {
 		"DISPLAY": "${localEnv:DISPLAY}",
 		"PYTHONUNBUFFERED": "1",
@@ -18,12 +21,11 @@
 			"configureZshAsDefaultShell": true
 		},
 		"ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
-			"packages": "curl,wget,git,jq,ca-certificates,build-essential,ripgrep,fd-find"
+			"packages": "wget,git,jq,build-essential,ripgrep,fd-find"
 		},
 		"ghcr.io/va-h/devcontainers-features/uv:1": {
 			"shellAutocompletion": true
 		},
-		"ghcr.io/devcontainers/features/node:1": {},
 		"ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {}
 	},
 	"runArgs": [
@@ -58,6 +60,6 @@
 		"source=${localEnv:HOME}/.codex,target=/home/vscode/.codex,type=bind",
 		"source=${localEnv:HOME}/.codex/config.toml,target=/home/vscode/.codex/config.toml,type=bind"
 	],
-	"postCreateCommand": "npm install -g @openai/codex@latest && uv sync --locked",
+	"postCreateCommand": "uv sync --locked",
 	"postStartCommand": "uv run pre-commit install"
 }
