@@ -23,7 +23,6 @@ target-version = "py{{python_version | replace('.', '')}}"
 exclude = [".git", ".ruff_cache", ".venv", ".vscode"]
 
 [tool.ruff.lint]
-preview = true
 select = [
     "ANN", # type annotation
     "B",   # flake8-bugbear
