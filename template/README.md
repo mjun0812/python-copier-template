@@ -10,7 +10,7 @@ After generating your project:
 cd your-project-name
 
 # Install dependencies
-uv sync
+uv sync --locked
 
 # Install pre-commit hooks
 uv run pre-commit install
@@ -30,9 +30,6 @@ uv run ruff check . --fix
 The template includes a complete Docker setup:
 
 ```bash
-# create uv.lock file
-uv sync
-
 # use the provided scripts
 ./docker/build.sh
 ./docker/run.sh # or./docker/run.sh (Command)
