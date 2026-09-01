@@ -38,7 +38,7 @@ jobs:
       - name: Test Package Installation
         working-directory: /tmp/test-copier
         run: |
-          uv sync
+          uv sync --locked
 
       - name: Test Ruff Format
         working-directory: /tmp/test-copier
@@ -53,7 +53,7 @@ jobs:
       - name: Test pytest
         working-directory: /tmp/test-copier
         run: |
-          uv run pytest -vs
+          uv run --frozen pytest -vs
 
       - name: Test Docker
         working-directory: /tmp/test-copier
