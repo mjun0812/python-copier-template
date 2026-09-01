@@ -7,6 +7,7 @@
 		"PYTHONDONTWRITEBYTECODE": "1",
 		"UV_CACHE_DIR": "/home/vscode/.cache/uv",
 		"UV_LINK_MODE": "copy",
+		"UV_PYTHON_PREFERENCE": "only-managed",
 		"UV_PROJECT_ENVIRONMENT": "/home/vscode/.venv",
 		"UV_COMPILE_BYTECODE": "1",
 		"CLAUDE_CONFIG_DIR": "/home/vscode/.claude"

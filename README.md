@@ -9,7 +9,7 @@ A simple modern Python project template powered by [Copier](https://copier.readt
 
 ## Features
 
-- 🚀 **Modern Python**: Support for Python 3.10-3.13
+- 🚀 **Modern Python**: Support for Python 3.10-3.14
 - 📦 **uv Package Manager**: Fast and reliable package management with [uv](https://github.com/astral-sh/uv)
 - 🐳 **Docker Support**: Complete Docker development environment
 - 📦 **Devcontainer Support**: VS Code devcontainer for consistent development
@@ -36,7 +36,7 @@ uvx copier copy gh:mjun0812/python-copier-template your-project-name
 Follow the interactive prompts to configure your project:
 
 - **Project name**: Your project's name
-- **Python version**: Choose from 3.10, 3.11, 3.12, or 3.13
+- **Python version**: Choose from 3.10, 3.11, 3.12, 3.13, or 3.14
 - **Package name**: The name used for importing your package (e.g., `import package_name`)
 - **Description**: A short description of your project
 - **Author name**: Your name

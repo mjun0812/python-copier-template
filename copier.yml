@@ -12,13 +12,14 @@ project_name:
 
 python_version:
   type: str
-  default: "3.12"
+  default: "3.13"
   help: Which version of Python do you want to use?
   choices:
     - "3.10"
     - "3.11"
     - "3.12"
     - "3.13"
+    - "3.14"
 
 package_name:
   type: str
