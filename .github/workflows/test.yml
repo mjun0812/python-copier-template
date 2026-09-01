@@ -17,6 +17,11 @@ jobs:
         python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
     steps:
       - uses: actions/checkout@v7
+      - name: Check shared action versions
+        run: |
+          diff \
+            <(grep -oE '(actions/checkout|astral-sh/setup-uv)@[^[:space:]]+' .github/workflows/test.yml) \
+            <(grep -oE '(actions/checkout|astral-sh/setup-uv)@[^[:space:]]+' template/.github/workflows/ci.yml)
       - name: Install uv
         uses: astral-sh/setup-uv@v10.0.1
         with:
