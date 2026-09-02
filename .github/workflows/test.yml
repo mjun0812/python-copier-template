@@ -20,8 +20,8 @@ jobs:
       - name: Check shared action versions
         run: |
           diff \
-            <(grep -oE '(actions/checkout|astral-sh/setup-uv)@[^[:space:]]+' .github/workflows/test.yml) \
-            <(grep -oE '(actions/checkout|astral-sh/setup-uv)@[^[:space:]]+' template/.github/workflows/ci.yml)
+            <(grep -oE '(actions/checkout|astral-sh/setup-uv)@[^[:space:]]+' .github/workflows/test.yml | sort -u) \
+            <(grep -oE '(actions/checkout|astral-sh/setup-uv)@[^[:space:]]+' template/.github/workflows/ci.yml | sort -u)
       - name: Install uv
         uses: astral-sh/setup-uv@v10.0.1
         with:
@@ -84,10 +84,55 @@ jobs:
           devcontainer build --workspace-folder /tmp/test-copier
           devcontainer up --workspace-folder /tmp/test-copier
 
+  template-lifecycle:
+    name: Template lifecycle
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Install uv
+        uses: astral-sh/setup-uv@v10.0.1
+      - name: Copy historical template
+        run: |
+          uvx copier copy \
+            --vcs-ref v1.0.0 \
+            ./ \
+            /tmp/test-copier-lifecycle \
+            --defaults \
+            -d project_name=lifecycle-project \
+            -d python_version=3.13 \
+            -d package_name=lifecycle_package \
+            -d description="Lifecycle test" \
+            -d author_name="Lifecycle Tester" \
+            -d author_email=lifecycle@example.com
+          git -C /tmp/test-copier-lifecycle init
+          git -C /tmp/test-copier-lifecycle config user.name "Lifecycle Tester"
+          git -C /tmp/test-copier-lifecycle config user.email lifecycle@example.com
+          git -C /tmp/test-copier-lifecycle add .
+          git -C /tmp/test-copier-lifecycle commit -m "chore: initialize generated project"
+      - name: Update to current template
+        run: |
+          uvx copier update --vcs-ref HEAD --defaults /tmp/test-copier-lifecycle
+          if git -C /tmp/test-copier-lifecycle diff --quiet; then
+            echo "Copier update produced no changes"
+            exit 1
+          fi
+          if grep -qx "_commit: v1.0.0" /tmp/test-copier-lifecycle/.copier-answers.yml; then
+            echo "Copier did not update the template revision"
+            exit 1
+          fi
+      - name: Build updated package
+        working-directory: /tmp/test-copier-lifecycle
+        run: |
+          uv build
+          test -f dist/lifecycle_project-0.0.1.tar.gz
+          test -f dist/lifecycle_project-0.0.1-py3-none-any.whl
+
   ci-check:
     name: CI Status Check
     runs-on: ubuntu-latest
-    needs: [ci]
+    needs: [ci, template-lifecycle]
     if: always()
     steps:
       - name: Some checks failed
