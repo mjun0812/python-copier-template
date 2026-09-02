@@ -33,6 +33,7 @@ jobs:
       - name: Copy Template
         run: |
           uvx copier copy \
+            --vcs-ref HEAD \
             ./ \
             /tmp/test-copier \
             -d project_name=test-copier \
