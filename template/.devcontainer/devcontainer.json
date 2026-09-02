@@ -20,9 +20,6 @@
 		"ghcr.io/devcontainers/features/common-utils:2": {
 			"configureZshAsDefaultShell": true
 		},
-		"ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
-			"packages": "wget,git,jq,build-essential,ripgrep,fd-find"
-		},
 		"ghcr.io/va-h/devcontainers-features/uv:1": {
 			"shellAutocompletion": true
 		},
