@@ -59,6 +59,6 @@
 		"source=${localEnv:HOME}/.claude,target=/home/vscode/.claude,type=bind",
 		"source=${localEnv:HOME}/.codex,target=/home/vscode/.codex,type=bind"
 	],
-	"postCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.cache/uv && uv sync --locked",
+	"postCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.cache && uv sync --locked",
 	"postStartCommand": "uv run pre-commit install"
 }
