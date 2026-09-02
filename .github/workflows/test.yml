@@ -58,6 +58,11 @@ jobs:
         run: |
           uv run ruff check --output-format=github .
 
+      - name: Test ty Type Check
+        working-directory: /tmp/test-copier
+        run: |
+          uv run --frozen ty check
+
       - name: Test pytest
         working-directory: /tmp/test-copier
         run: |

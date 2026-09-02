@@ -25,5 +25,8 @@ jobs:
       - name: Lint
         run: uv run --frozen ruff check --output-format=github .
 
+      - name: Type check
+        run: uv run --frozen ty check
+
       - name: Test
         run: uv run --frozen pytest
