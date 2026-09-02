@@ -52,13 +52,12 @@
 	},
 	"remoteUser": "vscode",
 	"containerUser": "vscode",
-	"initializeCommand": "mkdir -p ${localEnv:HOME}/.claude ${localEnv:HOME}/.codex && touch ${localEnv:HOME}/.claude/CLAUDE.md ${localEnv:HOME}/.codex/config.toml",
+	"initializeCommand": "mkdir -p ${localEnv:HOME}/.claude ${localEnv:HOME}/.codex",
 	"mounts": [
 		"source=shell_history-${devcontainerId},target=/shell_history,type=volume",
+		"source=uv-cache-${devcontainerId},target=/home/vscode/.cache/uv,type=volume",
 		"source=${localEnv:HOME}/.claude,target=/home/vscode/.claude,type=bind",
-		"source=${localEnv:HOME}/.claude/CLAUDE.md,target=/home/vscode/.claude/CLAUDE.md,type=bind",
-		"source=${localEnv:HOME}/.codex,target=/home/vscode/.codex,type=bind",
-		"source=${localEnv:HOME}/.codex/config.toml,target=/home/vscode/.codex/config.toml,type=bind"
+		"source=${localEnv:HOME}/.codex,target=/home/vscode/.codex,type=bind"
 	],
 	"postCreateCommand": "uv sync --locked",
 	"postStartCommand": "uv run pre-commit install"
