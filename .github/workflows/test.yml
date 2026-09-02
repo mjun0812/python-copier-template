@@ -26,6 +26,12 @@ jobs:
         uses: astral-sh/setup-uv@v10.0.1
         with:
           cache-suffix: ${{ matrix.python-version }}
+      - name: Install shell tools
+        run: sudo apt-get update && sudo apt-get install --yes shellcheck shfmt
+      - name: Check template shell scripts
+        run: |
+          shellcheck template/docker/*.sh
+          test -z "$(shfmt --list template/docker/*.sh)"
       - uses: actions/setup-node@v7
         with:
           node-version: latest
