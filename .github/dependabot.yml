@@ -4,3 +4,11 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+  - package-ecosystem: "pre-commit"
+    directory: "/template"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "uv"
+    directory: "/template"
+    schedule:
+      interval: "weekly"
