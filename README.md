@@ -16,6 +16,7 @@ A simple modern Python project template powered by [Copier](https://copier.readt
 - ✨ **AI Editor Support**: [AGENTS.md](https://agents.md) and
   [CLAUDE.md](https://docs.anthropic.com/en/docs/claude-code/overview) included for AI-powered development
 - 📝 **Type Hints**: Full type annotation support with modern Python features
+- 🔎 **Type Checking**: Pre-configured [ty](https://docs.astral.sh/ty/) for static type checking
 - 🔍 **Code Quality**: Pre-configured Ruff for linting and formatting
 - 🧪 **Testing**: pytest setup with example tests
 - 🔧 **Pre-commit Hooks**: Automated code quality checks
@@ -61,6 +62,8 @@ uv run pytest
 # Run formatting and linting (automatically runs on commit)
 uv run ruff format .
 uv run ruff check .
+# Run type checking
+uv run --frozen ty check
 # Auto Fix
 uv run ruff check . --fix
 ```
@@ -114,10 +117,13 @@ your-project/
 
 ## Q&A
 
-### Why don't you use a type checker?
+### How do I run type checking?
 
-I'm waiting for stable release of [`ty`](https://github.com/astral-sh/ty).
-You can install and use your preferred type checker.
+Run the pre-configured [`ty`](https://docs.astral.sh/ty/) type checker:
+
+```bash
+uv run --frozen ty check
+```
 
 ## Support
 
