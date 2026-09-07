@@ -11,10 +11,10 @@ _message_after_copy: |
 
      $ cd {{ _copier_conf.dst_path }}
 
-  2. Install dependencies and pre-commit hooks:
+  2. Install dependencies and git hooks:
 
      $ uv sync --locked
-     $ uv run pre-commit install
+     $ uv run prek install
 
   3. Run the checks:
 

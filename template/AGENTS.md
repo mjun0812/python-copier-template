@@ -31,7 +31,10 @@ Follow these guidelines precisely.
    - Format: `uv run --frozen ruff format .`
    - Check: `uv run --frozen ruff check .`
    - Fix: `uv run --frozen ruff check . --fix`
-2. Pre-commit
+2. Type Check
+   - Check: `uv run --frozen ty check`
+3. Git Hooks (prek)
    - Config: `.pre-commit-config.yaml`
+   - Install: `uv run prek install`
    - Runs: on git commit
-   - Tools: Ruff (Python)
+   - Tools: uv lock, Ruff, ty
