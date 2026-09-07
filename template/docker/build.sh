@@ -4,8 +4,8 @@ set -euo pipefail
 
 cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.."
 
-BUILDER_IMAGE="ubuntu:24.04"
-RUNNER_IMAGE="ubuntu:24.04"
+BUILDER_IMAGE="ubuntu:26.04"
+RUNNER_IMAGE="ubuntu:26.04"
 IMAGE_NAME="$(basename -- "$PWD" | tr '[:upper:]' '[:lower:]')"
 
 exec docker build \

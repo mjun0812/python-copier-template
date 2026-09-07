@@ -1,6 +1,10 @@
 # syntax=docker/dockerfile:1
 
-FROM mcr.microsoft.com/devcontainers/base:ubuntu-24.04
+FROM ghcr.io/astral-sh/uv:0.12.10 AS uv
+
+FROM mcr.microsoft.com/devcontainers/base:resolute
+
+COPY --from=uv /uv /uvx /usr/local/bin/
 
 RUN rm -f /etc/apt/apt.conf.d/docker-clean \
     && echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache

@@ -20,9 +20,7 @@
 		"ghcr.io/devcontainers/features/common-utils:2": {
 			"configureZshAsDefaultShell": true
 		},
-		"ghcr.io/va-h/devcontainers-features/uv:1": {
-			"shellAutocompletion": true
-		},
+		"ghcr.io/devcontainers/features/node:1": {},
 		"ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {}
 	},
 	"runArgs": [
@@ -40,6 +38,7 @@
 			"extensions": [
 				"ms-python.python",
 				"charliermarsh.ruff",
+				"astral-sh.ty",
 				"eamodio.gitlens",
 				"tamasfe.even-better-toml",
 				"ms-toolsai.jupyter",
