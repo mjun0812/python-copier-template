@@ -48,7 +48,8 @@ jobs:
             -d package_name=test_copier \
             -d description="Test Copier" \
             -d author_name=test-copier \
-            -d author_email=test-copier@example.com
+            -d author_email=test-copier@example.com \
+            -d license=MIT
 
       - name: Test Package Installation
         working-directory: /tmp/test-copier
@@ -74,6 +75,12 @@ jobs:
         working-directory: /tmp/test-copier
         run: |
           uv run --frozen pytest -vs --cov
+
+      - name: Test console script
+        working-directory: /tmp/test-copier
+        run: |
+          test -f LICENSE
+          uv run --frozen test-copier
 
       - name: Test Docker
         working-directory: /tmp/test-copier

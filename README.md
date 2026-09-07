@@ -42,6 +42,7 @@ Follow the interactive prompts to configure your project:
 - **Description**: A short description of your project
 - **Author name**: Your name
 - **Author email**: Your email address
+- **License**: MIT, Apache-2.0, BSD-3-Clause, or None (no LICENSE file)
 
 ### Development Setup
 
@@ -55,6 +56,9 @@ uv sync
 
 # Install git hooks
 uv run prek install
+
+# Run the application
+uv run your-project-name
 
 # Run tests
 uv run pytest

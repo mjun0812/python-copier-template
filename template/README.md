@@ -15,6 +15,9 @@ uv sync --locked
 # Install git hooks
 uv run prek install
 
+# Run the application
+uv run {{project_name}}
+
 # Run tests
 uv run pytest
 # Run tests with coverage
