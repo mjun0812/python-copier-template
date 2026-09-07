@@ -14,7 +14,8 @@ A simple modern Python project template powered by [Copier](https://copier.readt
 - 🐳 **Docker Support**: Complete Docker development environment
 - 📦 **Devcontainer Support**: VS Code devcontainer for consistent development
 - ✨ **AI Editor Support**: [AGENTS.md](https://agents.md) and
-  [CLAUDE.md](https://docs.anthropic.com/en/docs/claude-code/overview) included for AI-powered development
+  [CLAUDE.md](https://docs.anthropic.com/en/docs/claude-code/overview) included for AI-powered development,
+  plus shared Claude Code / Codex hooks that format and lint Python files as the agent edits them
 - 📝 **Type Hints**: Full type annotation support with modern Python features
 - 🔎 **Type Checking**: Pre-configured [ty](https://docs.astral.sh/ty/) for static type checking
 - 🔍 **Code Quality**: Pre-configured Ruff for linting and formatting
@@ -125,6 +126,10 @@ your-project/
 
 - [AGENTS.md(`./template/AGENTS.md`)](https://agents.md)
 - [CLAUDE.md(`./template/CLAUDE.md`)](https://docs.claude.com/en/docs/claude-code/memory#claude-md-imports)
+- `.claude/settings.json`: Claude Code permissions (pre-approved `uv run --frozen`, `uv sync`, read-only git
+  commands; `.env` files denied) and a `PostToolUse` hook
+- `.codex/hooks.json`: the same `PostToolUse` hook for Codex
+- `.agents/hooks/format-python.sh`: the hook script, runs `ruff format` and `ruff check --fix` on the edited file
 
 ## Q&A
 
