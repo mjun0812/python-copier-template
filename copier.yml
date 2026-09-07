@@ -1,5 +1,27 @@
 _templates_suffix: ""
 _subdirectory: template
+_skip_if_exists:
+  - uv.lock
+_message_after_copy: |
+  Your project "{{ project_name }}" has been created successfully!
+
+  Next steps:
+
+  1. Change directory to the project root:
+
+     $ cd {{ _copier_conf.dst_path }}
+
+  2. Install dependencies and pre-commit hooks:
+
+     $ uv sync --locked
+     $ uv run pre-commit install
+
+  3. Run the checks:
+
+     $ uv run --frozen ruff format . --check
+     $ uv run --frozen ruff check .
+     $ uv run --frozen ty check
+     $ uv run --frozen pytest
 
 project_name:
   type: str
