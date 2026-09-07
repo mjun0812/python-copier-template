@@ -94,8 +94,8 @@ docker compose up
 ### VS Code Devcontainer
 
 Open the project in VS Code and use the "Reopen in Container" command for a fully configured development environment.
-Devcontainer will automatically install uv, Claude Code, and git hooks. The image build installs the latest
-Codex release, so rebuilding the image updates Codex.
+Devcontainer will automatically install uv, Claude Code, Codex, and git hooks. The image build installs the
+latest Claude Code and Codex releases with their official installers, so rebuilding the image updates both.
 
 The container mounts the host `${HOME}/.claude` and `${HOME}/.codex` directories at `/home/vscode/.claude` and
 `/home/vscode/.codex` for authentication. These bind mounts are read-write, so changes made in the container can

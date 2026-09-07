@@ -47,8 +47,8 @@ docker compose up
 ### VS Code Devcontainer
 
 Open the project in VS Code and use the "Reopen in Container" command for a fully configured development environment.
-Devcontainer automatically installs uv and Claude Code, and installs the latest Codex release when the image is built.
-Rebuild the image to update Codex.
+Devcontainer automatically installs uv, Claude Code, and Codex. The latest Claude Code and Codex releases are
+installed with their official installers when the image is built, so rebuild the image to update them.
 
 The container mounts the host `${HOME}/.claude` and `${HOME}/.codex` directories at `/home/vscode/.claude` and
 `/home/vscode/.codex` for authentication. These bind mounts are read-write, so changes made in the container can
