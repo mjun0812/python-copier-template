@@ -4,8 +4,15 @@ version = "0.0.1"
 description = "{{description}}"
 readme = "README.md"
 authors = [{ name = "{{author_name}}", email = "{{author_email}}" }]
+{% if license != 'None' -%}
+license = "{{license}}"
+license-files = ["LICENSE"]
+{% endif -%}
 requires-python = ">={{python_version}}"
 dependencies = []
+
+[project.scripts]
+"{{project_name}}" = "{{package_name}}.__main__:main"
 
 [build-system]
 requires = ["hatchling"]
@@ -85,3 +92,4 @@ branch = true
 [tool.coverage.report]
 fail_under = 80
 show_missing = true
+exclude_also = ['if __name__ == "__main__":']

@@ -2,6 +2,7 @@ _templates_suffix: ""
 _subdirectory: template
 _skip_if_exists:
   - uv.lock
+  - LICENSE
 _message_after_copy: |
   Your project "{{ project_name }}" has been created successfully!
 
@@ -73,3 +74,13 @@ author_email:
     {% if not author_email or author_email.strip() == '' %}
     Author email cannot be empty
     {% endif %}
+
+license:
+  type: str
+  default: MIT
+  help: Which license do you want to use? Choose None to keep the project unlicensed.
+  choices:
+    - MIT
+    - Apache-2.0
+    - BSD-3-Clause
+    - None
