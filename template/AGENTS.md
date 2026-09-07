@@ -19,6 +19,7 @@ Follow these guidelines precisely.
 3. Testing Requirements
    - Framework: `uv run --frozen pytest`
    - Coverage: test edge cases and errors
+   - Coverage report: `uv run --frozen pytest --cov`
    - New features require tests
    - Bug fixes require regression tests
 

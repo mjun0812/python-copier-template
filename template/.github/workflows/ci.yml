@@ -46,4 +46,4 @@ jobs:
         run: uv run --frozen ty check
 
       - name: Test
-        run: uv run --frozen pytest
+        run: uv run --frozen pytest --cov

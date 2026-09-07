@@ -17,6 +17,8 @@ uv run prek install
 
 # Run tests
 uv run pytest
+# Run tests with coverage
+uv run pytest --cov
 
 # Run formatting and linting (automatically runs on commit)
 uv run ruff format .
