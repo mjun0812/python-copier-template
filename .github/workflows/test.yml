@@ -73,7 +73,7 @@ jobs:
       - name: Test pytest
         working-directory: /tmp/test-copier
         run: |
-          uv run --frozen pytest -vs
+          uv run --frozen pytest -vs --cov
 
       - name: Test Docker
         working-directory: /tmp/test-copier

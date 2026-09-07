@@ -15,7 +15,7 @@ build-backend = "hatchling.build"
 packages = ["src/{{package_name}}"]
 
 [dependency-groups]
-dev = ["prek>=0.5.2", "pytest>=9.1.1", "ruff>=0.16.6", "ty>=0.0.78"]
+dev = ["prek>=0.5.2", "pytest>=9.1.1", "pytest-cov>=7.1.0", "ruff>=0.16.6", "ty>=0.0.78"]
 
 [tool.ruff]
 line-length = 100
@@ -72,3 +72,16 @@ unfixable = [
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[tool.pytest]
+testpaths = ["tests"]
+addopts = ["-ra", "--strict-markers", "--strict-config"]
+xfail_strict = true
+
+[tool.coverage.run]
+source = ["src"]
+branch = true
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true
