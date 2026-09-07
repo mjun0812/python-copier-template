@@ -12,8 +12,8 @@ cd your-project-name
 # Install dependencies
 uv sync --locked
 
-# Install pre-commit hooks
-uv run pre-commit install
+# Install git hooks
+uv run prek install
 
 # Run tests
 uv run pytest

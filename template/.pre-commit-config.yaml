@@ -13,3 +13,9 @@ repos:
         args: [--fix]
       # Run the formatter.
       - id: ruff-format
+  - repo: https://github.com/astral-sh/ty-pre-commit
+    # ty version.
+    rev: v0.0.78
+    hooks:
+      # Run the type checker.
+      - id: ty

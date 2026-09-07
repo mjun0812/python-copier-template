@@ -19,7 +19,7 @@ A simple modern Python project template powered by [Copier](https://copier.readt
 - 🔎 **Type Checking**: Pre-configured [ty](https://docs.astral.sh/ty/) for static type checking
 - 🔍 **Code Quality**: Pre-configured Ruff for linting and formatting
 - 🧪 **Testing**: pytest setup with example tests
-- 🔧 **Pre-commit Hooks**: Automated code quality checks
+- 🔧 **Git Hooks**: Automated code quality checks on commit with [prek](https://github.com/j178/prek)
 - 🏗️ **CI Ready**: GitHub Actions workflows included
 
 ## Quick Start
@@ -53,8 +53,8 @@ cd your-project-name
 # Install dependencies
 uv sync
 
-# Install pre-commit hooks
-uv run pre-commit install
+# Install git hooks
+uv run prek install
 
 # Run tests
 uv run pytest
@@ -88,7 +88,7 @@ docker compose up
 ### VS Code Devcontainer
 
 Open the project in VS Code and use the "Reopen in Container" command for a fully configured development environment.
-Devcontainer will automatically install uv, Claude Code, and pre-commit hooks. The image build installs the latest
+Devcontainer will automatically install uv, Claude Code, and git hooks. The image build installs the latest
 Codex release, so rebuilding the image updates Codex.
 
 The container mounts the host `${HOME}/.claude` and `${HOME}/.codex` directories at `/home/vscode/.claude` and
