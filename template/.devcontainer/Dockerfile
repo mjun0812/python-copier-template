@@ -26,3 +26,10 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
         CODEX_NON_INTERACTIVE=1 \
         sh /tmp/install-codex.sh \
     && rm -f /tmp/install-codex.sh
+
+# Claude Code's native installer installs under $HOME, so run it as the container user
+USER vscode
+RUN curl -fsSL https://claude.ai/install.sh | bash \
+    && rm -rf /home/vscode/.claude/downloads
+USER root
+RUN ln -s /home/vscode/.local/bin/claude /usr/local/bin/claude
