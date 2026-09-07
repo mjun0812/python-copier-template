@@ -16,14 +16,15 @@ jobs:
       matrix:
         python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
       - name: Check shared action versions
         run: |
           diff \
             <(grep -oE '(actions/checkout|astral-sh/setup-uv)@[^[:space:]]+' .github/workflows/test.yml | sort -u) \
             <(grep -oE '(actions/checkout|astral-sh/setup-uv)@[^[:space:]]+' template/.github/workflows/ci.yml | sort -u)
       - name: Install uv
-        uses: astral-sh/setup-uv@v10.0.1
+        uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
         with:
           cache-suffix: ${{ matrix.python-version }}
       - name: Install shell tools
@@ -32,7 +33,7 @@ jobs:
         run: |
           shellcheck template/docker/*.sh
           test -z "$(shfmt --list template/docker/*.sh)"
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: latest
 
@@ -99,11 +100,12 @@ jobs:
     name: Template lifecycle
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
         with:
           fetch-depth: 0
       - name: Install uv
-        uses: astral-sh/setup-uv@v10.0.1
+        uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
       - name: Copy historical template
         run: |
           uvx copier copy \
