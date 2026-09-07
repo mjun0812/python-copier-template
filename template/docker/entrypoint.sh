@@ -7,7 +7,7 @@ GROUP_ID="${GROUP_ID:-1000}"
 USER_NAME="${USER_NAME:-user}"
 GROUP_NAME="${GROUP_NAME:-group}"
 
-userdel -r ubuntu >/dev/null 2>&1 || true # For Ubuntu 24.04 image
+userdel -r ubuntu >/dev/null 2>&1 || true # Ubuntu images ship a default "ubuntu" user with UID 1000
 groupadd -g "${GROUP_ID}" "${GROUP_NAME}" >/dev/null 2>&1 || true
 useradd -u "${USER_ID}" -g "${GROUP_NAME}" -G sudo -o -m "${USER_NAME}" >/dev/null 2>&1 || true
 
