@@ -131,6 +131,10 @@ your-project/
 - `.codex/hooks.json`: the same `PostToolUse` hook for Codex
 - `.agents/hooks/format-python.sh`: the hook script, runs `ruff format` and `ruff check --fix` on the edited file
 
+Both tools apply this configuration only in a trusted project. Claude Code asks once when you open the
+project; Codex additionally requires reviewing and trusting the hook with `/hooks`, and silently skips it
+until then.
+
 ## Q&A
 
 ### How do I run type checking?
