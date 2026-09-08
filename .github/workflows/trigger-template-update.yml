@@ -30,8 +30,10 @@ jobs:
       - name: Update template in child repository
         working-directory: child-repo
         run: |
-          # Update from template
-          uvx copier update -A --trust
+          # Update from template. --defaults answers prompts added since the
+          # child repository was last updated; without it Copier would try to
+          # ask interactively and fail.
+          uvx copier update -A --defaults --trust
 
       - name: Check for changes
         id: changes

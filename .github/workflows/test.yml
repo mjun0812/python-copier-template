@@ -133,7 +133,9 @@ jobs:
           git -C /tmp/test-copier-lifecycle commit -m "chore: initialize generated project"
       - name: Update to current template
         run: |
-          uvx copier update --vcs-ref HEAD --defaults /tmp/test-copier-lifecycle
+          # Same flags as .github/workflows/trigger-template-update.yml, so the
+          # tested update path matches the one used to reach child repositories.
+          uvx copier update --vcs-ref HEAD -A --defaults --trust /tmp/test-copier-lifecycle
           if git -C /tmp/test-copier-lifecycle diff --quiet; then
             echo "Copier update produced no changes"
             exit 1
