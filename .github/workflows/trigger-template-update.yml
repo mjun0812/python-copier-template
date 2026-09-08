@@ -28,6 +28,7 @@ jobs:
         uses: astral-sh/setup-uv@v10.0.1
 
       - name: Update template in child repository
+        id: update
         working-directory: child-repo
         run: |
           # Update from template. --defaults answers prompts added since the
@@ -35,11 +36,36 @@ jobs:
           # ask interactively and fail.
           uvx copier update -A --defaults --trust
 
+          # Copier writes conflicting files with inline markers and leaves them
+          # unmerged in the index, which stops the pull request action from
+          # creating its branch. Stage them so the pull request is still opened,
+          # and describe them so the markers are resolved before it is merged.
+          conflicts="$(git diff --name-only --diff-filter=U)"
+          if [ -n "${conflicts}" ]; then
+            echo "conflicts=true" >> "$GITHUB_OUTPUT"
+            {
+              echo "conflict_note<<CONFLICT_NOTE_EOF"
+              echo "### Conflicts to resolve"
+              echo
+              echo "Copier could not merge these files. They are committed with conflict markers"
+              echo '(`<<<<<<<`, `=======`, `>>>>>>>`); resolve every marker before merging.'
+              echo
+              echo "${conflicts}" | sed 's/^/- `/; s/$/`/'
+              echo "CONFLICT_NOTE_EOF"
+            } >> "$GITHUB_OUTPUT"
+            echo "${conflicts}" | sed 's/^/::warning::Conflict left for manual resolution in /'
+            git add -A
+          else
+            echo "conflicts=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Check for changes
         id: changes
         working-directory: child-repo
         run: |
-          if git diff --quiet; then
+          # git diff alone would miss an update that only adds files, because
+          # those stay untracked until the pull request action commits them.
+          if [ -z "$(git status --porcelain)" ]; then
             echo "has_changes=false" >> $GITHUB_OUTPUT
           else
             echo "has_changes=true" >> $GITHUB_OUTPUT
@@ -53,7 +79,7 @@ jobs:
           path: child-repo
           commit-message: |
             Update template to version ${{ github.event.release.tag_name || 'latest' }}
-          title: "Update template to version ${{ github.event.release.tag_name || 'latest' }}"
+          title: "Update template to version ${{ github.event.release.tag_name || 'latest' }}${{ steps.update.outputs.conflicts == 'true' && ' (resolve conflicts)' || '' }}"
           body: |
             ## Template Update
 
@@ -63,6 +89,8 @@ jobs:
             - Updated from template: ${{ github.repository }}
             - Template version: ${{ github.event.release.tag_name || 'latest' }}
             ${{ github.event.release.html_url && format('- Release notes: {0}', github.event.release.html_url) || '' }}
+
+            ${{ steps.update.outputs.conflict_note }}
 
             ### Testing
             Please review the changes and test the updated template before merging.
