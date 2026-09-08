@@ -135,18 +135,9 @@ Both tools apply this configuration only in a trusted project. Claude Code asks 
 project; Codex additionally requires reviewing and trusting the hook with `/hooks`, and silently skips it
 until then.
 
-## Q&A
-
-### How do I run type checking?
-
-Run the pre-configured [`ty`](https://docs.astral.sh/ty/) type checker:
-
-```bash
-uv run --frozen ty check
-```
-
 ## Support
 
 - 📖 [Copier Documentation](https://copier.readthedocs.io/)
 - 🐍 [uv Documentation](https://docs.astral.sh/uv/)
 - 🔍 [Ruff Documentation](https://docs.astral.sh/ruff/)
+- 🔍 [ty Documentation](https://docs.astral.sh/ty/)
