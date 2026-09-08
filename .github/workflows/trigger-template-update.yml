@@ -27,6 +27,38 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v10.0.1
 
+      - name: Resolve template version
+        id: version
+        env:
+          # The Release workflow creates the release with GITHUB_TOKEN, and
+          # GitHub does not start workflow runs from events raised by that
+          # token, so the release trigger only fires for a release published by
+          # hand. A tag push has no release context and must name itself.
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          REF_TYPE: ${{ github.ref_type }}
+          REF_NAME: ${{ github.ref_name }}
+          RUN_NUMBER: ${{ github.run_number }}
+          SERVER_URL: ${{ github.server_url }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          if [ -n "${RELEASE_TAG}" ]; then
+            version="${RELEASE_TAG}"
+          elif [ "${REF_TYPE}" = "tag" ]; then
+            version="${REF_NAME}"
+          else
+            version="latest"
+          fi
+          echo "value=${version}" >> "$GITHUB_OUTPUT"
+          # A manual run has no version to name its branch after, so fall back
+          # to the run number to keep branches from colliding, and link no
+          # release notes because there is no release to point at.
+          if [ "${version}" = "latest" ]; then
+            echo "slug=${RUN_NUMBER}" >> "$GITHUB_OUTPUT"
+          else
+            echo "slug=${version}" >> "$GITHUB_OUTPUT"
+            echo "release_url=${SERVER_URL}/${REPOSITORY}/releases/tag/${version}" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Update template in child repository
         id: update
         working-directory: child-repo
@@ -78,17 +110,17 @@ jobs:
           token: ${{ secrets.CHILD_REPO_TOKEN }}
           path: child-repo
           commit-message: |
-            Update template to version ${{ github.event.release.tag_name || 'latest' }}
-          title: "Update template to version ${{ github.event.release.tag_name || 'latest' }}${{ steps.update.outputs.conflicts == 'true' && ' (resolve conflicts)' || '' }}"
+            Update template to version ${{ steps.version.outputs.value }}
+          title: "Update template to version ${{ steps.version.outputs.value }}${{ steps.update.outputs.conflicts == 'true' && ' (resolve conflicts)' || '' }}"
           body: |
             ## Template Update
 
-            This PR updates the project template to version `${{ github.event.release.tag_name || 'latest' }}`.
+            This PR updates the project template to version `${{ steps.version.outputs.value }}`.
 
             ### Changes
             - Updated from template: ${{ github.repository }}
-            - Template version: ${{ github.event.release.tag_name || 'latest' }}
-            ${{ github.event.release.html_url && format('- Release notes: {0}', github.event.release.html_url) || '' }}
+            - Template version: ${{ steps.version.outputs.value }}
+            ${{ steps.version.outputs.release_url && format('- Release notes: {0}', steps.version.outputs.release_url) || '' }}
 
             ${{ steps.update.outputs.conflict_note }}
 
@@ -97,5 +129,5 @@ jobs:
 
             ---
             *This PR was automatically created by the template update workflow.*
-          branch: template-update-${{ github.event.release.tag_name || github.run_number }}
+          branch: template-update-${{ steps.version.outputs.slug }}
           delete-branch: true
