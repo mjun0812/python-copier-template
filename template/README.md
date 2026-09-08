@@ -30,6 +30,22 @@ uv run ruff check .
 uv run ruff check . --fix
 ```
 
+### AI Coding Agents
+
+Rules for agents live in `AGENTS.md` (`CLAUDE.md` imports it). A shared hook formats and lints every Python
+file right after Claude Code or Codex edits it, and reports the remaining diagnostics back to the agent:
+
+- `.agents/hooks/format-python.sh`: the hook script, runs `ruff format` and `ruff check --fix`
+- `.claude/settings.json`: Claude Code permissions and the `PostToolUse` hook (committed; put personal
+  overrides in `.claude/settings.local.json`, which is git-ignored)
+- `.codex/hooks.json`: the same `PostToolUse` hook for Codex
+
+Both tools require the project to be trusted before they apply its configuration:
+
+- Claude Code: accept the trust prompt the first time you open the project.
+- Codex: trust the project, then review and trust the hook with `/hooks`. Until you do, Codex skips the
+  hook without reporting an error.
+
 ### Docker Development
 
 The template includes a complete Docker setup:
